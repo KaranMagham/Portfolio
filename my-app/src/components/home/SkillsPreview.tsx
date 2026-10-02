@@ -1,0 +1,5 @@
+import { skillGroups } from "@/data/portfolio";
+import { Reveal } from "./Reveal";
+import { SectionLabel } from "./SectionLabel";
+
+export function SkillsPreview() { return <section className="skills section-shell" id="skills"><Reveal><SectionLabel index="03">Tools of the trade</SectionLabel><div className="section-heading-row"><h2>What I know<br /><em>so far.</em></h2><p>A growing toolkit for turning ideas into resilient, human-centered software.</p></div></Reveal><div className="skill-groups">{skillGroups.map((group, groupIndex) => <Reveal className="skill-group" key={group.label}><span className="skill-index">0{groupIndex + 1}</span><h3>{group.label}</h3><div className="skill-list">{group.items.map((skill) => <span className="skill-pill" key={skill}>{skill}</span>)}</div></Reveal>)}</div></section>; }

@@ -1,0 +1,5 @@
+import { journey } from "@/data/portfolio";
+import { Reveal } from "./Reveal";
+import { SectionLabel } from "./SectionLabel";
+
+export function Journey() { return <section className="journey section-shell" id="journey"><Reveal><SectionLabel index="04">The current chapter</SectionLabel><div className="section-heading-row"><h2>Currently building<br /><em>& learning.</em></h2><p>No finish line in sight. Just better questions, sharper fundamentals, and useful things shipped.</p></div></Reveal><div className="journey-grid"><Reveal className="journey-column"><span className="journey-label"><i className="journey-dot building" />Building</span>{journey.building.map((item) => <div className="journey-item" key={item}>{item}</div>)}</Reveal><Reveal className="journey-column"><span className="journey-label"><i className="journey-dot learning" />Learning next</span><div className="learning-cloud">{journey.learning.map((item) => <span key={item}>{item}</span>)}</div></Reveal></div></section>; }
