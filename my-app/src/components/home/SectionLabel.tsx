@@ -1,1 +1,0 @@
-export function SectionLabel({ index, children }: { index: string; children: React.ReactNode }) { return <p className="section-label"><span>{index}</span>{children}</p>; }
