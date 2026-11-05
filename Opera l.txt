@@ -1,0 +1,682 @@
+
+
+### Practical 1: L.P.P. Formulation
+
+Aim:
+
+* To formulate a Linear Programming Problem for a company manufacturing two products.
+
+* To identify decision variables, objective function and constraints.
+
+* To verify the model graphically.
+
+Tools: Graph paper / Desmos / GeoGebra / MS Excel Solver.
+
+Steps to perform:
+
+* Read the given problem carefully.
+
+* Identify the quantities that need to be calculated.
+
+* Define decision variables:
+
+    * = quantity of product P1.
+
+    * = quantity of product P2.
+
+* Write the objective function using the given profit or cost per unit.
+
+* Write constraints based on available resources, such as machine time and labour time.
+
+* Add non-negativity restrictions: .
+
+* Convert the inequalities into equations for drawing the graph.
+
+* Find the intercepts of each line.
+
+* Draw the lines and identify the common feasible region.
+
+* Find the corner points and substitute them into the objective function.
+
+* Identify the point that gives the required maximum profit or minimum cost.
+
+Step example – how to form the model:
+
+If the question gives two products, first create a table containing their resource requirements and profit per unit. Then use the following structure:
+
+\\text{Maximise/Minimise } Z=c_1x_1+c_2x_2
+
+Subject to:
+
+a_1x_1+b_1x_2\\leq/\\geq cx_1,x_2\\geq0
+
+No separate programming code is required for this practical.
+
+### Practical 2: Graphical Method and Solver – Maximization
+
+Aim:
+
+* To solve a maximization L.P.P. using the graphical method.
+
+* To plot constraints and identify the feasible region and corner points.
+
+* To verify the optimal solution using Excel Solver.
+
+Tools: Graph paper / Desmos / MS Excel Solver.
+
+Steps to perform:
+
+* Identify the two decision variables and .
+
+* Write the objective function for maximization.
+
+* Write all the given constraints.
+
+* Convert each inequality into an equation.
+
+* Calculate the x-axis and y-axis intercepts.
+
+* Plot the constraint lines on graph paper.
+
+* Identify the common feasible region.
+
+* Find all corner points of the feasible region.
+
+* Substitute each corner point into the objective function.
+
+* Select the point that gives the maximum value.
+
+* Open Excel and enter the decision variables in separate cells.
+
+* Enter the objective function and constraint formulas.
+
+* Open Data → Solver.
+
+* Set the objective cell and select Max.
+
+* Select the decision-variable cells and enter the constraints.
+
+* Select Simplex LP and click Solve.
+
+Step example – Excel setup:
+
+| Cell   | Enter                                                   |
+| ------ | ------------------------------------------------------- |
+| B2, C2 | Decision variables                                      |
+| D2     | =40*B2+30*C2 (objective formula structure from the PDF) |
+| D4     | =2*B2+C2 (constraint LHS)                               |
+| D5     | =B2+2*C2 (constraint LHS)                               |
+
+In Solver, set objective to D2, choose Max, changing cells B2:C2, and add the constraints for D4 and D5. Select Simplex LP.
+
+### Practical 3: Graphical Method and Solver – Minimization
+
+Aim:
+
+* To formulate a diet problem as a minimization L.P.P.
+
+* To solve the problem graphically and find the quantities of foods required.
+
+* To verify the solution using Excel Solver.
+
+Tools: Graph paper / Desmos / MS Excel Solver.
+
+Steps to perform:
+
+* Define and as the quantities of foods F1 and F2.
+
+* Write the objective function using the cost per unit of each food.
+
+* Write the nutrient constraints using the minimum requirements.
+
+* Add non-negativity restrictions.
+
+* Convert the inequalities into equations.
+
+* Calculate the intercepts of each constraint line.
+
+* Plot the lines on graph paper.
+
+* Identify the common feasible region.
+
+* Find the corner points of the feasible region.
+
+* Substitute each corner point into the cost function.
+
+* Select the point giving the minimum cost.
+
+* Open Excel and enter the decision variables, objective formula and constraints.
+
+* Open Data → Solver.
+
+* Set the objective cell and select Min.
+
+* Select the decision-variable cells and enter the constraints.
+
+* Select Simplex LP and click Solve.
+
+Step example – Excel setup:
+
+| Cell   | Enter                            |
+| ------ | -------------------------------- |
+| B2, C2 | Quantities of F1 and F2          |
+| D2     | Total cost formula               |
+| D4, D5 | Nutrient constraint formulas     |
+| F4, F5 | Required minimum nutrient values |
+
+In Solver, select Min, set B2:C2 as changing cells, add the nutrient constraints using `>=`, and select Simplex LP.
+
+### Practical 4: Simplex Method
+
+Aim:
+
+* To solve a Linear Programming Problem using the Simplex Method.
+
+* To prepare simplex tables and perform iterations.
+
+* To determine the optimal solution.
+
+Tools: Simplex table / calculator / Excel (if required).
+
+Steps to perform:
+
+* Write the objective function and constraints.
+
+* Convert all constraints into standard form.
+
+* Add slack variables to the less-than-or-equal-to constraints.
+
+* Prepare the initial simplex table.
+
+* Write the values above the variable columns.
+
+* Calculate for each column.
+
+* Calculate .
+
+* Select the entering variable using the largest positive value of , for a maximization problem.
+
+* Calculate the ratio using:
+
+\\text{Ratio}=\\frac{\\text{RHS}}{\\text{Positive pivot-column value}}
+
+* Select the smallest positive ratio to identify the leaving variable.
+
+* Identify the pivot element at the intersection of the entering column and leaving row.
+
+* Divide the pivot row by the pivot element.
+
+* Make all other values in the pivot column zero using row operations.
+
+* Prepare the next simplex table.
+
+* Repeat the process until no positive value remains in .
+
+* Read the optimal values from the final table.
+
+Step example – simplex table format:
+
+| Basis   | CB  | x1          | x2          | S1        | S2        | RHS       | Ratio     |
+| ------- | --- | ----------- | ----------- | --------- | --------- | --------- | --------- |
+| S1      | 0   | Coefficient | Coefficient | 1         | 0         | RHS       | Calculate |
+| S2      | 0   | Coefficient | Coefficient | 0         | 1         | RHS       | Calculate |
+| Zj      |     | Calculate   | Calculate   | Calculate | Calculate | Calculate |           |
+| Cj − Zj |     | Calculate   | Calculate   | Calculate | Calculate |           |           |
+
+Excel formulas:
+
+* : `=SUMPRODUCT(CB_range, column_range)`
+
+* : `=Cj_cell-Zj_cell`
+
+* Ratio: `=RHS_cell/pivot_column_cell`
+
+* New pivot row: `=Old_cell/Pivot_element`
+
+* Other rows: `=Old_cell-(Pivot_column_value*New_pivot_row_cell)`
+
+No separate programming code is required; the practical uses simplex calculations.
+
+### Practical 5: Simplex Method – Multiple Constraints
+
+Aim:
+
+* To formulate an L.P.P. with multiple constraints.
+
+* To solve it using the Simplex Method in Microsoft Excel.
+
+* To determine the optimal product mix and maximum profit.
+
+Tools: Microsoft Excel.
+
+Steps to perform:
+
+* Identify the decision variables for the given products.
+
+* Write the objective function using the profit per unit.
+
+* Write all the resource constraints.
+
+* Convert the constraints into standard form by adding slack variables.
+
+* Open Microsoft Excel and prepare the simplex table.
+
+* Enter the coefficients of the decision variables and slack variables.
+
+* Enter the RHS values and the values.
+
+* Calculate using the SUMPRODUCT formula.
+
+* Calculate .
+
+* Select the entering variable using the most negative value in .
+
+* Calculate the ratios using RHS divided by positive pivot-column values.
+
+* Select the smallest positive ratio to identify the leaving variable.
+
+* Identify the pivot element.
+
+* Perform pivot operations using Excel formulas.
+
+* Prepare the next simplex table.
+
+* Repeat until no negative value remains in the row.
+
+* Read the optimal product quantities and objective value from the final table.
+
+Step example – Excel formulas:
+
+| Calculation | Formula                                           |
+| ----------- | ------------------------------------------------- |
+| Zj          | =SUMPRODUCT(CB_range,column_range)                |
+| Zj − Cj     | =Zj_cell-Cj_cell                                  |
+| Ratio       | =RHS_cell/pivot_column_cell                       |
+| Pivot row   | =Old_cell/Pivot_element                           |
+| Other rows  | =Old_cell-(Pivot_column_value*New_pivot_row_cell) |
+
+Use the formulas in the appropriate cells and copy them across the table for each iteration.
+
+### Practical 6: Big-M Method
+
+Aim:
+
+* To solve an L.P.P. using the Big-M Method.
+
+* To introduce surplus and artificial variables with Big-M penalties.
+
+* To construct simplex tables and determine the optimal solution.
+
+Tools: Big-M method / simplex tables / calculator.
+
+Steps to perform:
+
+* Write the given objective function and constraints.
+
+* Identify the constraints with `>=` and `=`.
+
+* For a `<=` constraint, add a slack variable.
+
+* For a `>=` constraint, subtract a surplus variable and add an artificial variable.
+
+* For an `=` constraint, add an artificial variable.
+
+* Assign a large penalty to artificial variables in the objective function.
+
+* Prepare the initial simplex table.
+
+* Calculate and .
+
+* For minimization, select the most negative value of as the entering variable.
+
+* Calculate the positive ratios.
+
+* Select the smallest positive ratio to identify the leaving variable.
+
+* Identify the pivot element.
+
+* Perform pivot operations to prepare the next table.
+
+* Repeat the iterations until all values of are non-negative.
+
+* Check that no artificial variable remains in the optimal basis.
+
+* Read the optimal solution from the final table.
+
+Step example – converting constraints:
+
+| Constraint type | What to add                          |
+| --------------- | ------------------------------------ |
+| <=              | Add slack variable:                  |
+| >=              | Subtract surplus and add artificial: |
+| =               | Add artificial variable:             |
+
+For a minimization problem, the artificial variable receives a penalty of in the objective function.
+
+Excel formulas:
+
+* : `=SUMPRODUCT(CB_range,column_range)`
+
+* : `=Cj_cell-Zj_cell`
+
+* Ratio: `=RHS_cell/pivot_column_cell`
+
+* Pivot row: `=Old_cell/Pivot_element`
+
+* Other rows: `=Old_cell-(Pivot_column_value*New_pivot_row_cell)`
+
+### Practical 7: Duality
+
+Aim:
+
+* To formulate the dual of a given primal L.P.P.
+
+* To solve the primal using the Simplex Method and the dual using the graphical method.
+
+* To verify the relationship between the optimal values of the primal and dual.
+
+Tools: Simplex method / graph paper / calculator.
+
+Steps to perform:
+
+* Write the given primal L.P.P.
+
+* Identify its objective function and constraints.
+
+* Introduce dual variables .
+
+* Convert the primal maximization problem into a dual minimization problem.
+
+* Interchange the objective coefficients and RHS values according to the duality rules.
+
+* Transpose the coefficient matrix.
+
+* Write the dual constraints.
+
+* Solve the primal using the Simplex Method.
+
+* Prepare the initial simplex table and perform iterations.
+
+* Find the optimal values of the primal variables.
+
+* Draw the dual constraint lines on graph paper.
+
+* Identify the feasible region and corner points.
+
+* Evaluate the dual objective function at each corner point.
+
+* Compare the primal and dual optimal values.
+
+* Verify the relationship:
+
+\\text{Maximum }Z=\\text{Minimum }W
+
+Step example – forming the dual:
+
+For a primal maximization problem:
+
+\\text{Maximise }Z=c_1x_1+c_2x_2
+
+Subject to:
+
+a_{11}x_1+a_{12}x_2\\leq b_1a_{21}x_1+a_{22}x_2\\leq b_2
+
+The dual structure is:
+
+\\text{Minimise }W=b_1y_1+b_2y_2
+
+Subject to:
+
+a_{11}y_1+a_{21}y_2\\geq c_1a_{12}y_1+a_{22}y_2\\geq c_2y_1,y_2\\geq0
+
+No separate programming code is required.
+
+### Practical 8: Transportation Problem
+
+Aim:
+
+* To find an initial basic feasible solution using North-West Corner, Least Cost and Vogel's Approximation Methods.
+
+* To obtain the optimum transportation schedule using the MODI (u–v) Method.
+
+Tools: Transportation table / calculator / Excel.
+
+Steps to perform:
+
+* Prepare the transportation cost matrix.
+
+* Enter the supply values and demand values.
+
+* Calculate total supply and total demand.
+
+* Check whether the transportation problem is balanced.
+
+* If unbalanced, add a dummy row or column.
+
+* Apply the North-West Corner Method:
+
+    * Start from the top-left cell.
+
+    * Allocate the minimum of available supply and demand.
+
+    * Adjust the remaining supply and demand.
+
+    * Move right or down as required.
+
+* Apply the Least Cost Method:
+
+    * Find the cell with the lowest transportation cost.
+
+    * Allocate the maximum possible quantity.
+
+    * Update supply and demand.
+
+    * Repeat until all are satisfied.
+
+* Apply Vogel's Approximation Method:
+
+    * Calculate row and column penalties.
+
+    * Select the row or column with the highest penalty.
+
+    * Allocate to the lowest-cost cell in it.
+
+    * Update supply and demand.
+
+    * Recalculate penalties and repeat.
+
+* Calculate and compare the initial transportation costs.
+
+* Check the number of occupied cells using:
+
+m+n-1
+
+* Apply the MODI Method to the selected initial solution.
+
+* Calculate the and values for occupied cells using:
+
+u_i+v_j=c_{ij}
+
+13\. Calculate the opportunity cost of each unoccupied cell:
+
+\\Delta_{ij}=c_{ij}-(u_i+v_j)
+
+* If all opportunity costs are non-negative, the solution is optimal.
+
+* Otherwise, select the cell with the most negative opportunity cost.
+
+* Form a closed loop using occupied cells.
+
+* Mark alternate plus and minus signs in the loop.
+
+* Adjust allocations using the smallest allocation in a minus position.
+
+* Repeat the MODI procedure until the optimal solution is obtained.
+
+Step example – transportation table format:
+
+| Source / Destination | D1                | D2                | D3                | Supply |
+| -------------------- | ----------------- | ----------------- | ----------------- | ------ |
+| S1                   | Cost / Allocation | Cost / Allocation | Cost / Allocation | Supply |
+| S2                   | Cost / Allocation | Cost / Allocation | Cost / Allocation | Supply |
+| S3                   | Cost / Allocation | Cost / Allocation | Cost / Allocation | Supply |
+| Demand               | Demand            | Demand            | Demand            |        |
+
+For each cell, record the transportation cost and allocated quantity. Keep the supply and demand totals updated after every allocation.
+
+No separate programming code is required; the practical is performed using transportation tables and calculations.
+
+### Practical 9: Assignment Problem – Minimization
+
+Aim:
+
+* To assign workers to jobs on a one-to-one basis.
+
+* To minimise the total assignment cost or time.
+
+* To solve the assignment problem using the Hungarian Method.
+
+Tools: Assignment matrix / calculator / Excel.
+
+Steps to perform:
+
+* Prepare the given assignment cost matrix.
+
+* Check whether the matrix is square.
+
+* If it is not square, add a dummy row or column with zero cost.
+
+* Perform row reduction:
+
+    * Find the smallest element in each row.
+
+    * Subtract it from every element in that row.
+
+* Perform column reduction:
+
+    * Find the smallest element in each column.
+
+    * Subtract it from every element in that column.
+
+* Cover all zeros using the minimum number of horizontal and vertical lines.
+
+* Count the number of lines.
+
+* If the number of lines equals the order of the matrix, proceed to assignment.
+
+* If the number of lines is less than the order:
+
+    * Find the smallest uncovered element.
+
+    * Subtract it from all uncovered elements.
+
+    * Add it to elements at the intersections of lines.
+
+    * Leave the remaining elements unchanged.
+
+* Repeat the zero-covering and adjustment process.
+
+* Make one-to-one assignments using independent zeros.
+
+* Calculate the total minimum cost using the original cost matrix.
+
+Step example – Hungarian Method format:
+
+Suppose the assignment matrix has four workers and four jobs. Arrange it as:
+
+| Worker / Job | J1   | J2   | J3   | J4   |
+| ------------ | ---- | ---- | ---- | ---- |
+| W1           | Cost | Cost | Cost | Cost |
+| W2           | Cost | Cost | Cost | Cost |
+| W3           | Cost | Cost | Cost | Cost |
+| W4           | Cost | Cost | Cost | Cost |
+
+Then perform row reduction, column reduction, zero covering and assignment. Use the original matrix to calculate the total cost.
+
+No separate programming code is required.
+
+### Practical 10: Assignment Problem – Maximization
+
+Aim:
+
+* To assign sales representatives to territories so that total expected sales are maximum.
+
+* To convert the maximization problem into a minimization problem.
+
+* To solve it using the Hungarian Method, considering prohibited assignments.
+
+Tools: Assignment matrix / calculator / Excel.
+
+Steps to perform:
+
+* Prepare the given sales or profit matrix.
+
+* Identify the largest value in the matrix.
+
+* Convert the maximization matrix into a minimization matrix using:
+
+\\text{New Cost}=\\text{Largest Value}-\\text{Original Value}
+
+* Replace any prohibited assignment with a very large cost .
+
+* Perform row reduction by subtracting the smallest element of each row.
+
+* Perform column reduction by subtracting the smallest element of each column.
+
+* Cover all zeros using the minimum number of horizontal and vertical lines.
+
+* Count the number of lines.
+
+* If the number of lines is less than the order of the matrix:
+
+    * Find the smallest uncovered element.
+
+    * Subtract it from all uncovered elements.
+
+    * Add it to elements at line intersections.
+
+    * Leave the other elements unchanged.
+
+* Repeat the zero-covering and adjustment process.
+
+* If the number of lines equals the order of the matrix, proceed with the assignment.
+
+* Make one-to-one assignments using independent zeros.
+
+* Ensure that the prohibited assignment is not selected.
+
+* Calculate the maximum sales using the original profit matrix, not the converted matrix.
+
+Step example – conversion format:
+
+Original maximization matrix:
+
+| Representative / Territory | T1    | T2    | T3         | T4    |
+| -------------------------- | ----- | ----- | ---------- | ----- |
+| R1                         | Sales | Sales | Sales      | Sales |
+| R2                         | Sales | Sales | Sales      | Sales |
+| R3                         | Sales | Sales | Prohibited | Sales |
+| R4                         | Sales | Sales | Sales      | Sales |
+
+Conversion:
+
+C_{ij}=M_{\\text{largest}}-P_{ij}
+
+Replace the prohibited cell with a large value in the converted cost matrix. Then apply the Hungarian Method.
+
+No separate programming code is required.
+
+### Important formulas to remember
+
+| Practical                   | Formula / Rule                               |
+| --------------------------- | -------------------------------------------- |
+| 1. L.P.P.                   | Objective function and constraints           |
+| 2. Maximization             | Evaluate objective function at corner points |
+| 3. Minimization             | Evaluate cost at corner points               |
+| 4. Simplex                  | Ratio = RHS / positive pivot-column value    |
+| 5. Multiple constraints     |                                              |
+| 6. Big-M                    | Add artificial variables with penalty        |
+| 7. Duality                  | Maximum = Minimum at optimum                 |
+| 8. Transportation           |                                              |
+| 9. Assignment               | Row and column reduction                     |
+| 10. Maximization assignment | New Cost = 
